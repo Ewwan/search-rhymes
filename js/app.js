@@ -1,7 +1,7 @@
 // Formats response 
-const renderResponse = (response) => {
+const renderResponse = (response, status) => {
     if(!response){
-        console.log(response.status);
+        console.log(status);
     }
     if(!response.length){
         responseField.innerHTML = "<p>Try again!</p><p>There were no suggestions found!</p>";
@@ -41,7 +41,7 @@ const getSuggestions = () => {
     xhr.onreadystatechange = () => {
         //the following condition checkS to see if the request has finished
         if(xhr.readyState === XMLHttpRequest.DONE) {
-            renderResponse(xhr.response)
+            renderResponse(xhr.response, xhr.status)
         }
     };
 
