@@ -1,5 +1,3 @@
-"use strict";
-
 // Formats response 
 const renderResponse = (response) => {
     if(!response){
