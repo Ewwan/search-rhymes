@@ -36,7 +36,7 @@ const getSuggestions = () => {
 
     //Following I have included several possibilities of handling the Request:
 
-    /*    //XHR Object: GET
+    /*    //GET: XHR Object
 
     const xhr = new XMLHttpRequest();
     //Response handling:
@@ -52,7 +52,7 @@ const getSuggestions = () => {
     xhr.open('GET', endpoint); //'GET' sets the method and url sets the destination
     xhr.send(); // send the request to the server */
 
-    //fetch() : GET
+    //GET: fetch()
 
     fetch(endpoint).then(response => {
         if (response.ok) {
