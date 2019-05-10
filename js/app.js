@@ -1,4 +1,4 @@
-// Formats response 
+// Formating response 
 const renderResponse = (response, status) => {
     if(!response){
         console.log(status);
@@ -34,7 +34,10 @@ const getSuggestions = () => {
     const wordQuery = inputField.value; // it grabs what is in the inputField and assigns it to the variable wordQuery
     const endpoint = url + queryParams + wordQuery;
 
-    //XHR Object
+    //Following I have included several possibilities of handling the Request:
+
+    /*    //XHR Object: GET
+
     const xhr = new XMLHttpRequest();
     //Response handling:
     xhr.responseType = 'json';
@@ -47,7 +50,21 @@ const getSuggestions = () => {
 
     //opening request and sending the object:
     xhr.open('GET', endpoint); //'GET' sets the method and url sets the destination
-    xhr.send(); // send the request to the server
+    xhr.send(); // send the request to the server */
+
+    //fetch() : GET
+
+    fetch(endpoint).then(response => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error('Request failed!');
+      }, networkError => {
+        console.log(networkError.message)
+      })
+      .then(jsonResponse => {
+        renderResponse(jsonResponse);
+      })
 }
 
 //clearing previous results and displaying new results to the page
