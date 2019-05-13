@@ -29,14 +29,12 @@ const inputField = document.querySelector('#input');
 const submit = document.querySelector('#submit');
 const responseField = document.querySelector('#responseField');
 
-//AJAX function
+//Several possibilities of handling the AJAX Request:
+
+/*    //GET: XHR Object
 const getSuggestions = () => {
     const wordQuery = inputField.value; // it grabs what is in the inputField and assigns it to the variable wordQuery
     const endpoint = url + queryParams + wordQuery;
-
-    //Following I have included several possibilities of handling the Request:
-
-    /*    //GET: XHR Object
 
     const xhr = new XMLHttpRequest();
     //Response handling:
@@ -47,12 +45,16 @@ const getSuggestions = () => {
             renderResponse(xhr.response, xhr.status)
         }
     };
-
     //opening request and sending the object:
     xhr.open('GET', endpoint); //'GET' sets the method and url sets the destination
-    xhr.send(); // send the request to the server */
+    xhr.send(); // send the request to the server 
+}
+*/
 
-    //GET: fetch()
+/*    //GET: fetch()
+const getSuggestions = () => {
+    const wordQuery = inputField.value; // it grabs what is in the inputField and assigns it to the variable wordQuery
+    const endpoint = url + queryParams + wordQuery;
 
     fetch(endpoint).then(response => {
         if (response.ok) {
@@ -65,6 +67,23 @@ const getSuggestions = () => {
       .then(jsonResponse => {
         renderResponse(jsonResponse);
       })
+}
+*/
+
+//GET request using async and await ES8
+const getSuggestions = async () => {
+    const wordQuery = inputField.value;
+    const endpoint = url + queryParams + wordQuery;
+
+    try{
+        const response = await fetch(endpoint);
+        if(response.ok){
+            const jsonResponse = await response.json();
+            renderResponse(jsonResponse);
+        }
+    }catch(error){
+        console.log(error);
+    }
 }
 
 //clearing previous results and displaying new results to the page
